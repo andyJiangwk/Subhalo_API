@@ -285,7 +285,7 @@ int main(int argc, char *argv[]) {
     ;
     for (int isnap_t=snapshot_start;isnap_t>=snapshot_end;isnap_t--) {
         
-        long host_id,parent_id;
+        long host_id=-1,parent_id=-1;
         Subhalos_in1.Clear();
         Halos_in1.Clear();
         
@@ -307,7 +307,7 @@ int main(int argc, char *argv[]) {
                 host_cen[Subhalos_in1.Subhalos[isub].HostHaloId]=isub;
         }
         cout<<"1.3.3"<<endl;
-        #pragma omp parallel
+        #pragma omp parallel private(parent_id,host_id)
         {
             #pragma omp for
             for (long isub_index=0;isub_index<=max_index_t;isub_index++) {
